@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div th:fragment="content">
+    <a href="/auth/admin/students/add" class="btn btn-success">Add New Student</a>
+    <h2>Student List</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Registration Number</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Year Of Study</th>
+            <th>Year Of Joining</th>
+            <th>Academic Year</th>
+            <th>Community</th>
+            <th>Scholarship Name</th>
+            <th>Scholarship Type</th>
+            <th>Mobile Number</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.id}">1</td>
+            <td th:text="${student.registrationNumber}">12345</td>
+            <td th:text="${student.name}">John Doe</td>
+            <td th:text="${student.dob}">2000-01-01</td>
+            <td th:text="${student.email}">john@example.com</td>
+            <td th:text="${student.department}">Computer Science</td>
+            <td th:text="${student.yearOfStudy}">3</td>
+            <td th:text="${student.yearOfJoining}">2021</td>
+            <td th:text="${student.academicYear}">2023-2024</td>
+            <td th:text="${student.community}">BC</td>
+            <td th:text="${student.scholarshipName}">Merit Scholarship</td>
+            <td th:text="${student.scholarshipType}">Type A</td>
+            <td th:text="${student.mobileNumber}">9876543210</td>
+            <td>
+                <a th:href="@{'/auth/admin/students/edit/' + ${student.id}}" class="btn btn-primary">Edit</a>
+                <a th:href="@{'/auth/admin/students/delete/' + ${student.id}}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

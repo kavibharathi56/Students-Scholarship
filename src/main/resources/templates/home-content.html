@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Content</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div th:fragment="content">
+    <h4>WELCOME TO SCHOLARSHIP INFORMATION PORTAL</h4>
+    <div id="dashboard">
+        <div class="row" id="dashboard-cards">
+            <div class="col-md-6">
+                <div class="card animated" id="total-students">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Students</h5>
+                        <p class="card-text" id="total-students-count">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card animated" id="total-departments">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Departments</h5>
+                        <p class="card-text" id="total-departments-count">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card animated" id="scholarship-list-card">
+                    <div class="card-body">
+                        <h5 class="card-title">List of Scholarships</h5>
+                        <p class="card-text" id="scholarship-names">
+                            BC/MBC/DNC Scholarship, SC/ST Scholarship, NSP Minority Scholarship
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card animated" id="students-availed-scholarship">
+                    <div class="card-body">
+                        <h5 class="card-title">Students Availed Scholarship</h5>
+                        <p class="card-text" id="students-availed-count">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card animated" id="students-availed-scheme">
+                    <div class="card-body">
+                        <h5 class="card-title">Students Availed by Scheme</h5>
+                        <p class="card-text" id="students-availed-scheme-count">0</p>
+                        <select class="form-control" id="scheme-list" onchange="updateSchemeCount()">
+                            <option value="">Select Scheme</option>
+                            <option value="BC/MBC/DNC Scholarship">BC/MBC/DNC Scholarship</option>
+                            <option value="SC/ST Scholarship">SC/ST Scholarship</option>
+                            <option value="NSP Minority Scholarship">NSP Minority Scholarship</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card animated" id="students-availed-department">
+                    <div class="card-body">
+                        <h5 class="card-title">Students Availed by Department</h5>
+                        <p class="card-text" id="students-availed-department-count">0</p>
+                        <select class="form-control" id="department-list" onchange="updateDepartmentCount()">
+                            <option value="">Select Department</option>
+                            <option value="M.C.A">M.C.A</option>
+                            <option value="M.Sc(DS)">M.Sc(DS)</option>
+                            <option value="M.Sc(AI)">M.Sc(AI)</option>
+                            <option value="M.Sc(CS)">M.Sc(CS)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add more home content here -->
+</div>
+</body>
+</html>

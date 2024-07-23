@@ -1,0 +1,66 @@
+<!-- templates/student-form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Student Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div th:fragment="content">
+    <div class="container">
+        <h2>Student Form</h2>
+        <form th:action="@{/auth/admin/students/add}" th:object="${student}" method="post">
+            <div class="form-group">
+                <label for="registrationNumber">Registration Number</label>
+                <input type="text" class="form-control" id="registrationNumber" th:field="*{registrationNumber}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" class="form-control" id="dob" th:field="*{dob}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" class="form-control" id="department" th:field="*{department}" required>
+            </div>
+            <div class="form-group">
+                <label for="yearOfStudy">Year Of Study</label>
+                <input type="text" class="form-control" id="yearOfStudy" th:field="*{yearOfStudy}" required>
+            </div>
+            <div class="form-group">
+                <label for="yearOfJoining">Year Of Joining</label>
+                <input type="text" class="form-control" id="yearOfJoining" th:field="*{yearOfJoining}" required>
+            </div>
+            <div class="form-group">
+                <label for="academicYear">Academic Year</label>
+                <input type="text" class="form-control" id="academicYear" th:field="*{academicYear}" required>
+            </div>
+            <div class="form-group">
+                <label for="community">Community</label>
+                <input type="text" class="form-control" id="community" th:field="*{community}" required>
+            </div>
+            <div class="form-group">
+                <label for="scholarshipName">Scholarship Name</label>
+                <input type="text" class="form-control" id="scholarshipName" th:field="*{scholarshipName}" required>
+            </div>
+            <div class="form-group">
+                <label for="scholarshipType">Scholarship Type</label>
+                <input type="text" class="form-control" id="scholarshipType" th:field="*{scholarshipType}" required>
+            </div>
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="text" class="form-control" id="mobileNumber" th:field="*{mobileNumber}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

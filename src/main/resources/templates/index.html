@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Information Portal Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+        .header-title {
+            font-size: 1.5rem;
+            color: #3c068d;
+            margin-left: 15px;
+        }
+        .header-logo {
+            width: 100px;
+            height: auto;
+            margin-right: 15px;
+            opacity: 0.6;
+        }
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .background-overlay {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .login-form {
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .login-title {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        .login-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .forgot-link {
+            display: block;
+            margin-top: 10px;
+        }
+        .icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        .btn-primary {
+            background-color: #3c068d;
+            border-color: #3c068d;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #3c068d;
+            border-color: #3c068d;
+        }
+        .portal-title {
+            font-size: 1.2rem;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <h1 class="header-title">BHARATHIDASAN UNIVERSITY</h1>
+    <img th:src="@{/images/butp.png}" alt="BU Technology Park Logo" class="header-logo">
+</header>
+<div class="background-container">
+    <img th:src="@{/images/butp-medium.jpg}" alt="Background Overlay" class="background-overlay">
+</div>
+<div class="container">
+    <h2 class="text-center mb-4 portal-title">SCHOLARSHIP INFORMATION PORTAL</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="admin-login" class="login-form">
+                <h3 class="text-center login-title"><i class="fas fa-user-tie icon"></i>Admin Login</h3>
+                <form th:action="@{/auth/admin/login}" method="post">
+                    <div class="form-group">
+                        <label for="admin-username">Username:</label>
+                        <input type="text" class="form-control" id="admin-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password:</label>
+                        <input type="password" class="form-control" id="admin-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                    <div class="error" th:if="${error}" th:text="${error}"></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="student-login" class="login-form">
+                <h3 class="text-center login-title"><i class="fas fa-user-graduate icon"></i>Student Login</h3>
+                <form th:action="@{/auth/admin/students/login}" method="post">
+                    <div class="form-group">
+                        <label for="registrationNumber">Registration Number:</label>
+                        <input type="text" class="form-control" id="registrationNumber" name="registrationNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" class="form-control" id="dob" name="dob" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                    <div th:if="${studentError}" class="error">
+                        <p th:text="${studentError}"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

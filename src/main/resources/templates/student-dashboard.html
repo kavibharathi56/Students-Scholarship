@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Student Dashboard</h2>
+    <p>Welcome, <span th:text="${student.name}">Student Name</span>!</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>Registration Number</th>
+            <td><span th:text="${student.registrationNumber}">12345</span></td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td><span th:text="${student.dob}">1990-01-01</span></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><span th:text="${student.email}">student@example.com</span></td>
+        </tr>
+        <tr>
+            <th>Department</th>
+            <td><span th:text="${student.department}">Computer Science</span></td>
+        </tr>
+        <tr>
+            <th>Year Of Study</th>
+            <td><span th:text="${student.yearOfStudy}">3</span></td>
+        </tr>
+        <tr>
+            <th>Year Of Joining</th>
+            <td><span th:text="${student.yearOfJoining}">2021</span></td>
+        </tr>
+        <tr>
+            <th>Academic Year</th>
+            <td><span th:text="${student.academicYear}">2023-2024</span></td>
+        </tr>
+        <tr>
+            <th>Community</th>
+            <td><span th:text="${student.community}">BC</span></td>
+        </tr>
+        <tr>
+            <th>Scholarship Name</th>
+            <td><span th:text="${student.scholarshipName}">Merit Scholarship</span></td>
+        </tr>
+        <tr>
+            <th>Scholarship Type</th>
+            <td><span th:text="${student.scholarshipType}">Type A</span></td>
+        </tr>
+        <tr>
+            <th>Mobile Number</th>
+            <td><span th:text="${student.mobileNumber}">9876543210</span></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

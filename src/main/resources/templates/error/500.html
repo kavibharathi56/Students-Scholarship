@@ -1,0 +1,25 @@
+<!-- src/main/resources/templates/error/500.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Internal Server Error</title>
+    <style>
+        .container{
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h1>500 - Internal Server Error</h1>
+<p>Something went wrong on our end. Please try again later.</p>
+<a th:href="@{/}">Go Home</a>
+</div>
+</body>
+</html>
