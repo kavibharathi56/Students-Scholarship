@@ -2,6 +2,7 @@ package com.project.scholarship.controller;
 
 import com.project.scholarship.entity.admin;
 import com.project.scholarship.service.adminService;
+import com.project.scholarship.service.StudentService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +10,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/auth/admin")
-public class authController {
+public class adminController {
+    private final StudentService studentService;
 
     @Autowired
     private adminService adminService;
+
+
+
+    @Autowired
+    public adminController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<String> registerAdmin(@RequestBody admin admin) {
@@ -62,10 +75,45 @@ public class authController {
         if (session.getAttribute("admin") == null) {
             return "redirect:/";
         }
+
+        List<String> scholarshipNames = studentService.findDistinctScholarshipNames();
+        List<String> departmentNames = studentService.findDistinctDepartments();
+
         model.addAttribute("homeSection", true);
+        model.addAttribute("totalStudents", studentService.countTotalStudents());
+        model.addAttribute("totalDepartments", studentService.countTotalDepartments());
+        model.addAttribute("studentsAvailedScholarship", studentService.countStudentsAvailedScholarship());
+        model.addAttribute("studentsAvailedByScheme", studentService.getDistinctScholarshipNames());
+        model.addAttribute("studentsAvailedByDepartment", studentService.getDistinctDepartments()); // Initial value, will be updated via JS
+        model.addAttribute("scholarshipNames", scholarshipNames);
+        model.addAttribute("departmentNames", departmentNames);
         return "admin-dashboard";
     }
+    @GetMapping("/dashboard/schemeCount")
+    public ResponseEntity<Map<String, Long>> getSchemeCount(@RequestParam String scheme) {
+        try {
+            long count = studentService.countByScheme(scheme);
+            Map<String, Long> response = new HashMap<>();
+            response.put("count", count);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the error for debugging
+            return ResponseEntity.status(500).body(null);
+        }
+    }
 
+    @GetMapping("/dashboard/departmentCount")
+    public ResponseEntity<Map<String, Long>> getDepartmentCount(@RequestParam String department) {
+        try {
+            long count = studentService.countByDepartment(department);
+            Map<String, Long> response = new HashMap<>();
+            response.put("count", count);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the error for debugging
+            return ResponseEntity.status(500).body(null);
+        }
+    }
     @GetMapping("/logout")
     public String logoutAdmin(HttpSession session) {
         session.invalidate();

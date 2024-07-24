@@ -28,7 +28,13 @@
             </div>
             <div class="form-group">
                 <label for="department">Department</label>
-                <input type="text" class="form-control" id="department" th:field="*{department}" required>
+                <select class="form-control" id="department" th:field="*{department}" required>
+                    <option value="">Select Department</option>
+                    <option value="M.C.A">M.C.A</option>
+                    <option value="M.Sc(DS)">M.Sc(DS)</option>
+                    <option value="M.Sc(AI)">M.Sc(AI)</option>
+                    <option value="M.Sc(CS)">M.Sc(CS)</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="yearOfStudy">Year Of Study</label>
@@ -48,17 +54,39 @@
             </div>
             <div class="form-group">
                 <label for="scholarshipName">Scholarship Name</label>
-                <input type="text" class="form-control" id="scholarshipName" th:field="*{scholarshipName}" required>
+                <select class="form-control" id="scholarshipName" th:field="*{scholarshipName}" required>
+                    <option value="">Select Scholarship Name</option>
+                    <option value="BC/MBC/DNC Scholarship">BC/MBC/DNC Scholarship</option>
+                    <option value="SC/ST Scholarship">SC/ST Scholarship</option>
+                    <option value="NSP Minority Scholarship">NSP Minority Scholarship</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="scholarshipType">Scholarship Type</label>
-                <input type="text" class="form-control" id="scholarshipType" th:field="*{scholarshipType}" required>
+                <select class="form-control" id="scholarshipType" th:field="*{scholarshipType}" required>
+                    <option value="">Select Scholarship Type</option>
+                    <option value="State Government Scheme">State Government Scheme</option>
+                    <option value="Central Government Scheme">Central Government Scheme</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="scholarshipAmount">Scholarship Amount:</label>
+                <input type="number" id="scholarshipAmount" th:field="*{scholarshipAmount}" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" th:field="*{status}" class="form-control">
+                    <option value="Available">Available</option>
+                    <option value="Not available">Not available</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="mobileNumber">Mobile Number</label>
                 <input type="text" class="form-control" id="mobileNumber" th:field="*{mobileNumber}" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-info">Submit</button>
+            <br>
+            <a th:href="@{/auth/admin/students}" class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </div>

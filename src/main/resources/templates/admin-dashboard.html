@@ -28,7 +28,7 @@
         }
         .header {
             padding: 10px;
-            background-color: #007bff;
+            background-color: #7297bd;
             color: white;
             text-align: center;
             position: fixed;
@@ -95,6 +95,102 @@
         <div th:replace="~{scholarships :: content}"></div>
     </div>
 </div>
+
+
+
+
+
+
+
+<script th:if="${homeSection}">
+    // console.log('JavaScript is running');
+    document.addEventListener('DOMContentLoaded', function () {
+        const schemeSelect = document.getElementById('scheme-list');
+        const departmentSelect = document.getElementById('department-list');
+
+        function fetchAndUpdateCount(url, elementId) {
+            console.log('Fetching from:', url);
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // console.log('Data received:', data);
+                    document.getElementById(elementId).innerText = data.count;
+                })
+                .catch(error => console.error('Error fetching count:', error));
+        }
+
+        schemeSelect.addEventListener('change', function () {
+            const selectedScheme = this.value;
+            // console.log('Selected scheme:', selectedScheme);
+            if (selectedScheme) {
+                fetchAndUpdateCount(`/auth/admin/dashboard/schemeCount?scheme=${encodeURIComponent(selectedScheme)}`, 'students-availed-scheme-count');
+            } else {
+                document.getElementById('students-availed-scheme-count').innerText = '0';
+            }
+        });
+
+        departmentSelect.addEventListener('change', function () {
+            const selectedDepartment = this.value;
+            // console.log('Selected department:', selectedDepartment);
+            if (selectedDepartment) {
+                fetchAndUpdateCount(`/auth/admin/dashboard/departmentCount?department=${encodeURIComponent(selectedDepartment)}`, 'students-availed-department-count');
+            } else {
+                document.getElementById('students-availed-department-count').innerText = '0';
+            }
+        });
+    });
+</script>
+
+<script th:if="${scholarshipSection}">
+    document.addEventListener('DOMContentLoaded', function () {
+        const scholarshipSelect = document.getElementById('scholarshipName');
+        const studentsList = document.getElementById('students-list');
+
+        function updateStudentTable(students) {
+            studentsList.innerHTML = '';
+            if (students.length > 0) {
+                students.forEach(student => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${student.registrationNumber}</td>
+                        <td>${student.name}</td>
+                        <td>${student.department}</td>
+                        <td>${student.scholarshipName}</td>
+                        <td>${student.scholarshipAmount}</td>
+                        <td>${student.status}</td>
+                    `;
+                    studentsList.appendChild(row);
+                });
+            } else {
+                studentsList.innerHTML = '<tr><td colspan="6" class="text-center">No students found</td></tr>';
+            }
+        }
+
+        scholarshipSelect.addEventListener('change', function () {
+            const selectedScholarship = this.value;
+            let url = '/auth/admin/scholarships/students';
+            if (selectedScholarship) {
+                url += `?scholarship=${encodeURIComponent(selectedScholarship)}`;
+            }
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    updateStudentTable(data);
+                })
+                .catch(error => console.error('Error fetching students:', error));
+        });
+
+        // Initial load of all students
+        fetch('/auth/admin/scholarships/students')
+            .then(response => response.json())
+            .then(data => {
+                updateStudentTable(data);
+            })
+            .catch(error => console.error('Error fetching students:', error));
+    });
+
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>

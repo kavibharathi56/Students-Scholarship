@@ -11,7 +11,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Registration Number</th>
             <th>Name</th>
             <th>Date of Birth</th>
@@ -23,12 +22,14 @@
             <th>Community</th>
             <th>Scholarship Name</th>
             <th>Scholarship Type</th>
+            <th>Scholarship Amount</th>
+            <th>Status</th>
             <th>Mobile Number</th>
             <th>Actions</th>
         </thead>
         <tbody>
         <tr th:each="student : ${students}">
-            <td th:text="${student.id}">1</td>
+
             <td th:text="${student.registrationNumber}">12345</td>
             <td th:text="${student.name}">John Doe</td>
             <td th:text="${student.dob}">2000-01-01</td>
@@ -40,6 +41,8 @@
             <td th:text="${student.community}">BC</td>
             <td th:text="${student.scholarshipName}">Merit Scholarship</td>
             <td th:text="${student.scholarshipType}">Type A</td>
+            <td th:text="${student.scholarshipAmount}">Merit Scholarship</td>
+            <td th:text="${student.status}">Type A</td>
             <td th:text="${student.mobileNumber}">9876543210</td>
             <td>
                 <a th:href="@{'/auth/admin/students/edit/' + ${student.id}}" class="btn btn-primary">Edit</a>

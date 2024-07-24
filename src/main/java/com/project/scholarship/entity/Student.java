@@ -17,7 +17,7 @@ public class Student {
     private String name;
     private LocalDate dob;
     private String email;
-    private String Department;
+    private String department;
     private String YearOfStudy;
     private String YearOfJoining;
     private String academicYear;
@@ -25,13 +25,34 @@ public class Student {
     private String scholarshipName;
     private String scholarshipType;
     private String mobileNumber;
+    private Double scholarshipAmount; // New field
+    private String status;
+
+
+    public Double getScholarshipAmount() {
+        return scholarshipAmount;
+    }
+
+    public void setScholarshipAmount(Double scholarshipAmount) {
+        this.scholarshipAmount = scholarshipAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
 
     public String getDepartment() {
-        return Department;
+        return department;
     }
 
     public void setDepartment(String department) {
-        Department = department;
+        this.department = department;
     }
 
     public String getYearOfStudy() {
@@ -39,7 +60,7 @@ public class Student {
     }
 
     public void setYearOfStudy(String yearOfStudy) {
-        YearOfStudy = yearOfStudy;
+        this.YearOfStudy = yearOfStudy;
     }
 
     public String getYearOfJoining() {
@@ -47,7 +68,7 @@ public class Student {
     }
 
     public void setYearOfJoining(String yearOfJoining) {
-        YearOfJoining = yearOfJoining;
+        this.YearOfJoining = yearOfJoining;
     }
 
     public String getAcademicYear() {
