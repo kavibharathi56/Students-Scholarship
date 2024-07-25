@@ -1,5 +1,6 @@
 package com.project.scholarship.config;
 
+// This is  spring security config for security purpose
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

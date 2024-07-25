@@ -7,38 +7,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .sidebar {
-            height: 100%;
-            width: 250px;
+            height: calc(100% - 54px);
+            width: 180px;
             position: fixed;
-            top: 0;
+            top: 62px;
             left: 0;
-            background-color: #f8f9fa;
+            background-color: #3c068d;
+            overflow-x: hidden;
             padding-top: 20px;
-            z-index: 1000;
+            transition: 0.5s;
+            z-index: 1;
+            display: none;
         }
         .sidebar a {
-            padding: 15px 20px;
+            padding: 10px 15px;
             text-decoration: none;
             font-size: 18px;
-            color: #000;
+            color: white;
             display: block;
+            transition: 0.3s;
         }
         .sidebar a:hover {
-            background-color: #ddd;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .open-btn {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 10px;
         }
         .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #3c068d;
             padding: 10px;
-            background-color: #7297bd;
-            color: white;
-            text-align: center;
+            width: 100%;
             position: fixed;
             top: 0;
-            left: 250px;
-            width: calc(100% - 250px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            left: 20;
+            z-index: 2;
+        }
+        .header-title {
+            font-size: 1.5rem;
+            margin: 0;
+            color:#fff;
+            flex-grow: 1;
+        }
+        .header-logo {
+            width: 120px;
+            height: 90%;
+            position: relative;
+            right: 2px;
         }
         .main-content {
             margin-left: 250px;
@@ -58,19 +77,18 @@
     </style>
 </head>
 <body>
-<!-- Sidebar -->
-<div class="sidebar">
-    <a href="/auth/admin/dashboard">Home</a>
+<header class="header">
+    <span class="open-btn" onclick="toggleSidebar()">&#9776;</span>
+    <h1 class="header-title"><b>BHARATHIDASAN UNIVERSITY</b></h1>
+    <img th:src="@{/images/butp.png}" alt="BU Technology Park Logo" class="header-logo">
+</header>
+
+
+<div class="sidebar" id="mySidebar">
+    <a href="/auth/admin/dashboard">Home</a></a>
     <a href="/auth/admin/scholarships">Scholarships</a>
     <a href="/auth/admin/students">Students</a>
-</div>
-
-<!-- Header -->
-<div class="header">
-    <h2>Admin Dashboard</h2>
-    <button class="logout-button" onclick="window.location.href='/auth/admin/logout'">
-        <i class="fas fa-sign-out-alt"></i> Logout
-    </button>
+    <a href="/auth/admin/logout">Logout</a>
 </div>
 
 <!-- Main Content -->
@@ -140,6 +158,21 @@
         });
     });
 </script>
+<script>function toggleSidebar() {
+    const sidebar = document.getElementById("mySidebar");
+    const mainContent = document.getElementById("mainContent");
+    const isOpen = sidebar.style.display === "block";
+
+    if (isOpen) {
+        sidebar.style.display = "none"; // Close sidebar
+        mainContent.classList.remove("opened");
+    } else {
+        sidebar.style.display = "block"; // Open sidebar
+        mainContent.classList.add("opened");
+    }
+}</script>
+
+
 
 <script th:if="${scholarshipSection}">
     document.addEventListener('DOMContentLoaded', function () {
