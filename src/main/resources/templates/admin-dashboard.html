@@ -62,7 +62,7 @@
         .main-content {
             margin-left: 250px;
             margin-top: 60px;
-            padding: 20px;
+            padding: 50px;
         }
         .logout-button {
             background: none;
@@ -85,7 +85,7 @@
 
 
 <div class="sidebar" id="mySidebar">
-    <a href="/auth/admin/dashboard">Home</a></a>
+    <a href="/auth/admin/dashboard">Home</a>
     <a href="/auth/admin/scholarships">Scholarships</a>
     <a href="/auth/admin/students">Students</a>
     <a href="/auth/admin/logout">Logout</a>
@@ -113,11 +113,6 @@
         <div th:replace="~{scholarships :: content}"></div>
     </div>
 </div>
-
-
-
-
-
 
 
 <script th:if="${homeSection}">

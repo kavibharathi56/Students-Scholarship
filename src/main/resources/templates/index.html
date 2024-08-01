@@ -15,22 +15,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: #3c068d;
             padding: 10px;
             width: 100%;
             position: relative;
             z-index: 2;
         }
         .header-title {
-            font-size: 1.5rem;
-            color: #3c068d;
+            font-size: 1.6rem;
+            color: #fff;
             margin-left: 15px;
         }
         .header-logo {
-            width: 100px;
+            width: 150px;
             height: auto;
-            margin-right: 15px;
-            opacity: 0.6;
+            margin-right: 5px;
         }
         .background-container {
             position: absolute;
@@ -60,7 +59,7 @@
         .login-form {
             margin-bottom: 10px;
             background-color: rgba(255, 255, 255, 1);
-            padding: 20px;
+            padding: 60px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
@@ -72,10 +71,6 @@
         .login-form:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-        .forgot-link {
-            display: block;
-            margin-top: 10px;
         }
         .icon {
             font-size: 1.2rem;
@@ -100,7 +95,7 @@
 </head>
 <body>
 <header class="header">
-    <h1 class="header-title">BHARATHIDASAN UNIVERSITY</h1>
+    <h1 class="header-title"><b>BHARATHIDASAN UNIVERSITY</b></h1>
     <img th:src="@{/images/butp.png}" alt="BU Technology Park Logo" class="header-logo">
 </header>
 <div class="background-container">

@@ -1,74 +1,206 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="utf-8">
     <title>Student Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #3c068d;
+            padding: 20px;
+            width: 100%;
+            position: fixed;
+            z-index: 2;
+        }
+        .header-title {
+            font-size: 1.5rem;
+            margin: 0;
+            color:#fff;
+            flex-grow: 1;
+        }
+        .header-logo {
+            width: 120px;
+            height: 90%;
+            position: absolute;
+            right: 2px;
+
+        }
+        .open-btn {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .sidebar {
+            height: 100%;
+            width: 180px;
+            position: fixed;
+            top: 54px;
+            left: 0;
+            background-color: #3c068d;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+            z-index: 1;
+            display: none;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .main-content {
+            margin-left: 0;
+            padding: 70px;
+            transition: margin-left 0.5s;
+        }
+        .main-content.opened {
+            margin-left: 180px;
+        }
+        .main-content h2 {
+            margin-top: 70px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
         .container {
             margin: 20px;
         }
     </style>
 </head>
 <body>
-
-
-<div class="container">
-    <h2>Student Dashboard</h2>
-    <p>Welcome, <span th:text="${student.name}">Student Name</span>!</p>
-    <table class="table table-bordered">
-        <tr>
-            <th>Registration Number</th>
-            <td><span th:text="${student.registrationNumber}">12345</span></td>
-        </tr>
-        <tr>
-            <th>Date of Birth</th>
-            <td><span th:text="${student.dob}">1990-01-01</span></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td><span th:text="${student.email}">student@example.com</span></td>
-        </tr>
-        <tr>
-            <th>Department</th>
-            <td><span th:text="${student.department}">Computer Science</span></td>
-        </tr>
-        <tr>
-            <th>Year Of Study</th>
-            <td><span th:text="${student.yearOfStudy}">3</span></td>
-        </tr>
-        <tr>
-            <th>Year Of Joining</th>
-            <td><span th:text="${student.yearOfJoining}">2021</span></td>
-        </tr>
-        <tr>
-            <th>Academic Year</th>
-            <td><span th:text="${student.academicYear}">2023-2024</span></td>
-        </tr>
-        <tr>
-            <th>Community</th>
-            <td><span th:text="${student.community}">BC</span></td>
-        </tr>
-        <tr>
-            <th>Scholarship Name</th>
-            <td><span th:text="${student.scholarshipName}">Merit Scholarship</span></td>
-        </tr>
-        <tr>
-            <th>Scholarship Type</th>
-            <td><span th:text="${student.scholarshipType}">Type A</span></td>
-        </tr>
-        <tr>
-            <th>Scholarship Amount</th>
-            <td><span th:text="${student.scholarshipAmount}">Merit Scholarship</span></td>
-        </tr>
-        <tr>
-            <th>Scholarship Status</th>
-            <td><span th:text="${student.status}">Type A</span></td>
-        </tr>
-        <tr>
-            <th>Mobile Number</th>
-            <td><span th:text="${student.mobileNumber}">9876543210</span></td>
-        </tr>
-    </table>
+<header class="header">
+    <span class="open-btn" onclick="toggleSidebar()">&#9776;</span>
+    <h1 class="header-title"><b>BHARATHIDASAN UNIVERSITY</b></h1>
+    <img th:src="@{/images/butp.png}" alt="BU Technology Park Logo" class="header-logo">
+</header>
+<div class="sidebar" id="mySidebar">
+    <a href="#" onclick="showSection('student-dashboard')">Student Dashboard</a>
+    <a href="#" onclick="showSection('apply-scholarship')">Apply Scholarship</a>
+    <a href="#" onclick="showSection('contact-us')">Contact Us</a>
+    <a href="/auth/admin/logout">Logout</a>
 </div>
+
+<div class="main-content" id="mainContent">
+    <div id="student-dashboard" style="display: none;">
+        <h2>Student Dashboard</h2>
+        <p>Welcome, <span th:text="${student.name}">Student Name</span>!</p>
+        <table class="table table-bordered">
+            <tr>
+                <th>Registration Number</th>
+                <td><span th:text="${student.registrationNumber}">12345</span></td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td><span th:text="${student.dob}">1990-01-01</span></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><span th:text="${student.email}">student@example.com</span></td>
+            </tr>
+            <tr>
+                <th>Department</th>
+                <td><span th:text="${student.department}">Computer Science</span></td>
+            </tr>
+            <tr>
+                <th>Year Of Study</th>
+                <td><span th:text="${student.yearOfStudy}">3</span></td>
+            </tr>
+            <tr>
+                <th>Year Of Joining</th>
+                <td><span th:text="${student.yearOfJoining}">2021</span></td>
+            </tr>
+            <tr>
+                <th>Academic Year</th>
+                <td><span th:text="${student.academicYear}">2023-2024</span></td>
+            </tr>
+            <tr>
+                <th>Community</th>
+                <td><span th:text="${student.community}">BC</span></td>
+            </tr>
+            <tr>
+                <th>Scholarship Name</th>
+                <td><span th:text="${student.scholarshipName}">Merit Scholarship</span></td>
+            </tr>
+            <tr>
+                <th>Scholarship Type</th>
+                <td><span th:text="${student.scholarshipType}">Type A</span></td>
+            </tr>
+            <tr>
+                <th>Scholarship Amount</th>
+                <td><span th:text="${student.scholarshipAmount}">Merit Scholarship</span></td>
+            </tr>
+            <tr>
+                <th>Scholarship Status</th>
+                <td><span th:text="${student.status}">Type A</span></td>
+            </tr>
+            <tr>
+                <th>Mobile Number</th>
+                <td><span th:text="${student.mobileNumber}">9876543210</span></td>
+            </tr>
+        </table>
+    </div>
+    <div id="apply-scholarship" style="display: none;">
+        <h2>Apply Scholarship</h2>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <strong>To apply for scholarships follow through the below link:</strong>
+                <div class="scholarship-details">
+                    <p><strong>Apply link:</strong></p> <a href="http://ssp.tn.gov.in/">TNSSP Portal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact-us" style="display: none;">
+        <h2>Contact Us</h2>
+        <br>
+        <p>
+            <strong>Address:</strong> <span id="contact-address">Bharathidasan University,Khajamalai Campus,Tiruchirappalli-620 024</span><br>
+            <br>
+            <strong>Phone:</strong> <span id="contact-phone">91 431 2407071, 2407072, 2407074, 2407075 , 2407008, 2407009, 2407036, 2407066</span><br>
+            <br>
+        <p><strong>For grievances and support contact Student Affairs Nodal Officer though:</strong></p>
+        <strong>Email:</strong> <a href=mailto:"scgrc@bdu.ac.in">scgrc@bdu.ac.in</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById("mySidebar");
+        const mainContent = document.getElementById("mainContent");
+        const isOpen = sidebar.style.display === "block";
+
+        if (isOpen) {
+            sidebar.style.display = "none";
+            mainContent.classList.remove("opened");
+        } else {
+            sidebar.style.display = "block";
+            mainContent.classList.add("opened");
+        }
+    }
+
+    function showSection(sectionId) {
+        const sections = ['student-dashboard', 'apply-scholarship', 'contact-us'];
+        sections.forEach(section => {
+            document.getElementById(section).style.display = 'none';
+        });
+        document.getElementById(sectionId).style.display = 'block';
+    }
+
+
+    showSection('student-dashboard');
+</script>
 </body>
 </html>
