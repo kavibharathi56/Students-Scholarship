@@ -44,7 +44,7 @@
             width: 100%;
             position: fixed;
             top: 0;
-            left: 20;
+            left:0;
             z-index: 2;
         }
         .header-title {
@@ -172,6 +172,7 @@
 <script th:if="${scholarshipSection}">
     document.addEventListener('DOMContentLoaded', function () {
         const scholarshipSelect = document.getElementById('scholarshipName');
+        const departmentSelect = document.getElementById('departmentName');
         const studentsList = document.getElementById('students-list');
 
         function updateStudentTable(students) {
@@ -194,11 +195,19 @@
             }
         }
 
-        scholarshipSelect.addEventListener('change', function () {
-            const selectedScholarship = this.value;
+        function fetchStudents() {
+            const selectedScholarship = scholarshipSelect.value;
+            const selectedDepartment = departmentSelect.value;
             let url = '/auth/admin/scholarships/students';
+            let params = [];
             if (selectedScholarship) {
-                url += `?scholarship=${encodeURIComponent(selectedScholarship)}`;
+                params.push(`scholarship=${encodeURIComponent(selectedScholarship)}`);
+            }
+            if (selectedDepartment) {
+                params.push(`department=${encodeURIComponent(selectedDepartment)}`);
+            }
+            if (params.length > 0) {
+                url += '?' + params.join('&');
             }
 
             fetch(url)
@@ -207,7 +216,10 @@
                     updateStudentTable(data);
                 })
                 .catch(error => console.error('Error fetching students:', error));
-        });
+        }
+
+        scholarshipSelect.addEventListener('change', fetchStudents);
+        departmentSelect.addEventListener('change', fetchStudents);
 
         // Initial load of all students
         fetch('/auth/admin/scholarships/students')
@@ -217,6 +229,7 @@
             })
             .catch(error => console.error('Error fetching students:', error));
     });
+
 
 </script>
 

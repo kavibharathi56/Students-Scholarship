@@ -11,6 +11,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th>Serial No</th>
             <th>Registration Number</th>
             <th>Name</th>
             <th>Date of Birth</th>
@@ -28,8 +29,8 @@
             <th>Actions</th>
         </thead>
         <tbody>
-        <tr th:each="student : ${students}">
-
+        <tr th:each="student, stat : ${students}">
+             <td th:text="${stat.index + 1}">1</td>
             <td th:text="${student.registrationNumber}">12345</td>
             <td th:text="${student.name}">John Doe</td>
             <td th:text="${student.dob}">2000-01-01</td>
