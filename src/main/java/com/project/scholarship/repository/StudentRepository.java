@@ -13,7 +13,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByRegistrationNumberAndDob(String registrationNumber, LocalDate dob);
 
     List<Student> findByScholarshipName(String scholarshipName);
-
+    List<Student> findByDepartment(String department);
+    List<Student> findByScholarshipNameAndDepartment(String scholarshipName, String department);
     long countByScholarshipNameIsNotNull();
 
     @Query("SELECT COUNT(s) FROM Student s WHERE s.department = :department")
